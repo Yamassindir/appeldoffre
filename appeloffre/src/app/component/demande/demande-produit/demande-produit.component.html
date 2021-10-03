@@ -1,0 +1,77 @@
+<form [formGroup]="step">
+ 
+  
+  <p>Pour une mise à jour globale du catalogue à partir d'un fichier
+    excel veuillez charger le fichier source</p>
+  <input type="file" (change)="charger($event)" />
+  <div id="output"></div>
+  <div class="classFilter" fxLayout="row" fxLayoutAlign="space-around start">
+    <button mat-raised-button color="primary" (click)="rechercheFichierExcel()">
+      <mat-icon>cloud_download</mat-icon> Mise à Jour
+    </button>
+    <button mat-raised-button color="primary" (click)="generer()">
+         Générer produit
+      </button> 
+  </div>
+  <br>
+
+
+  <div class="example-form" fxLayout="column" fxLayoutAlign="start stretch">
+
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="quantite">
+      <th mat-header-cell *matHeaderCellDef> quantite </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantite}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="reference">
+      <th mat-header-cell *matHeaderCellDef> reference </th>
+      <td mat-cell *matCellDef="let element"> {{element.reference}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="designation">
+      <th mat-header-cell *matHeaderCellDef> designation </th>
+      <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="prixliste">
+      <th mat-header-cell *matHeaderCellDef> prixliste </th>
+      <td mat-cell *matCellDef="let element"> {{element.prixliste | currency : 'EUR' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="prixcat">
+      <th mat-header-cell *matHeaderCellDef> prixcat </th>
+      <td mat-cell *matCellDef="let element"> {{element.prixcat | currency : 'EUR' }} </td>
+    </ng-container>
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+    <!-- Group header -->
+    <ng-container matColumnDef="groupHeader">
+      <td colspan="999" mat-cell *matCellDef="let group">
+        <mat-icon [style.paddingLeft.ex]="((group.level-1) * 1)" style="padding-right: 1ex;">
+          {{group.expanded ? 'expand_less' : 'expand_more'}}
+        </mat-icon>
+        <strong>{{group.name}} = {{group.value}}</strong>
+      </td>
+    </ng-container>
+  
+    <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: matGroupBy.isGroup" (click)="matGroupBy.toggleExpanded(row)"> </tr>
+  
+  </table>
+</div>
+
+<pre>
+
+  
+</pre>
+  
+<div fxLayout="row" fxLayoutAlign="space-around end">
+    <button mat-raised-button matStepperPrevious>Retour</button>
+    <button mat-raised-button matStepperNext>Suivant</button>
+  </div>
+</form>

@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <span>Nouvelle prestation</span>
+  </div>
+  <div>
+    <form fxLayout="column" fxLayoutAlign="space-around stretch">
+
+      <mat-form-field>
+        <input matInput placeholder="Reference du prestation" [(ngModel)]="prestation.prestationref" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput  placeholder="Désignation" [(ngModel)]="prestation.designation" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="phaseid" [(ngModel)]="prestation.phaseid" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput type="number" placeholder="prestataireid" [(ngModel)]="prestation.prestataireid" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="nombre d'intervenant" [(ngModel)]="prestation.nombreintervenant" [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+    </form>
+    <button mat-raised-button color="accent" (click)="ajouter()" [disabled]="false">Ajouter</button>
+  </div>
+</div>

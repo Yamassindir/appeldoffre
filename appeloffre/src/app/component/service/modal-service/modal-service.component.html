@@ -1,0 +1,21 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <span>Nouveau service</span>
+  </div>
+  <div>
+    <form fxLayout="column" fxLayoutAlign="space-around stretch">
+
+      <mat-form-field>
+        <input matInput placeholder="Reference du service" [(ngModel)]="service.serviceref" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput  placeholder="Désignation" [(ngModel)]="service.designation" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="Prix service" [(ngModel)]="service.prixservice" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+    </form>
+    <button mat-raised-button color="accent" (click)="ajouter()" [disabled]="false">Ajouter</button>
+  </div>
+</div>

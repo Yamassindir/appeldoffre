@@ -1,0 +1,49 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table *ngIf="listeClient != null" #table [dataSource]="listeClient">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="clientnom">
+      <mat-header-cell *matHeaderCellDef> <h4>Nom</h4>  </mat-header-cell>
+      <mat-cell *matCellDef="let client"> {{client.clientnom}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="commentaire">
+      <mat-header-cell *matHeaderCellDef> <h4>commentaire</h4> </mat-header-cell>
+      <mat-cell *matCellDef="let client"> {{client.commentaire}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="datecrea">
+      <mat-header-cell *matHeaderCellDef> <h4>Date Création</h4> </mat-header-cell>
+      <mat-cell *matCellDef="let client"> {{client.datecrea}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> <h4>Actions</h4> </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button (click)="openAjoutClient(client)" [disabled]="false">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-button color="warn" (click)="supprimer(client)" [disabled]="false">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <br>
+  <div fxLayout="row" fxLayoutAlign="space-around center" >
+    <button mat-raised-button color="accent" (click)="openAjoutClient(null)" [disabled]="false">Ajouter</button>
+    <button mat-raised-button color="accent" (click)="enregistrer()">Enregistrer</button>
+  </div>
+</div>

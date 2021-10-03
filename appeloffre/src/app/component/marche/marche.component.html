@@ -1,0 +1,21 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center">
+<mat-form-field>
+  <mat-label>Choisir un marche</mat-label>
+  <mat-select [(ngModel)]="marcheid" name="marche" placeholder="Marche*" (selectionChange)="getListeCatalogueParMarche($event.value)">
+    <mat-option *ngFor="let marche of listeMarche" [value]="marche.marcheid">
+      {{marche.marchenom}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Choisir un Catalogue</mat-label>
+  <mat-select [(ngModel)]="catalogueid" name="catalogue" placeholder="Catalogue*">
+    <mat-option *ngFor="let catalogue of listeCatalogue" [value]="catalogue.catalogueid">
+      {{catalogue.cataloguenom}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-raised-button color="accent" (click)="appliquer()" [disabled]="false">Ajouter</button>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<form [formGroup]="step">
+  
+  <mat-form-field>
+    <input matInput placeholder="Address" formControlName="thirdCtrl" required>
+  </mat-form-field>
+  <button mat-raised-button (click)=affichInp()>click</button>
+  <div fxLayout="row" fxLayoutAlign="space-around end">
+    <button mat-raised-button matStepperPrevious>Retour</button>
+    <button mat-raised-button matStepperNext>Suivant</button>
+  </div>
+</form>

@@ -1,0 +1,59 @@
+<div class="example-container mat-elevation-z8">
+	<div class="example-header">
+		<mat-form-field>
+			<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+		</mat-form-field>
+	</div>
+
+	<mat-table *ngIf="listeAbonnement != null"  #table [dataSource]="listeAbonnement">
+
+		<!-- Position Column -->
+		<ng-container matColumnDef="abonnementref">
+			<mat-header-cell *matHeaderCellDef> Reference </mat-header-cell>
+			<mat-cell *matCellDef="let abonnement"> {{abonnement.abonnementref}} </mat-cell>
+		</ng-container>
+
+		<!-- Name Column -->
+		<ng-container matColumnDef="designation">
+			<mat-header-cell *matHeaderCellDef> Designation </mat-header-cell>
+			<mat-cell *matCellDef="let abonnement"> {{abonnement.designation}} </mat-cell>
+		</ng-container>
+
+		<!-- Weight Column -->
+		<ng-container matColumnDef="duree">
+			<mat-header-cell *matHeaderCellDef> duree </mat-header-cell>
+			<mat-cell *matCellDef="let abonnement"> {{abonnement.duree}} </mat-cell>
+		</ng-container>
+
+		<!-- Symbol Column -->
+		<ng-container matColumnDef="prixabonnement">
+			<mat-header-cell *matHeaderCellDef> prix d'abonnement </mat-header-cell>
+			<mat-cell *matCellDef="let abonnement"> {{abonnement.prixabonnement}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="actions">
+      <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row" >
+           <button mat-button (click)="openAjoutAbonnement(abonnement)" [disabled]="false"><mat-icon>edit</mat-icon></button>
+           <button mat-button color="warn" (click)="supprimer(abonnement)" [disabled]="false"><mat-icon>delete</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <button mat-raised-button color="accent" (click)="openAjoutAbonnement(null)" [disabled]="false">Ajouter</button>
+  <button mat-raised-button color="accent" (click)="enregistrer()">Enregistrer</button>
+</div>
+
+<p>Appuyer sur exporter pour télécharger le catalogue</p>
+<div class="classFilter" fxLayout="row" fxLayoutAlign="space-around start">
+<button mat-raised-button color="primary" (click)="exportAsXLSX()"><mat-icon>cloud_download</mat-icon>exporter</button>
+<button mat-raised-button color="primary" (click)="rechercheByReferencesFichierExcel()"><mat-icon>cloud_download</mat-icon>Mise à Jour</button>
+
+</div>
+<br>
+<p>Pour une mise à jour globale du catalogue à partir d'un fichier 
+  excel veuillez charger le fichier source</p>
+<input type="file" (change)="onFileChange($event)" />
+<div id="output"></div>

@@ -1,0 +1,29 @@
+<div class="example-form" fxLayout="column" fxLayoutAlign="start center">
+    <div class="classFilter" fxLayout="row" fxLayoutAlign="center stretch">
+        <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Recherche par reference" value="" [(ngModel)]="reference"  [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      </form>
+    </div>
+    <table id="customers" class="mat-elevation-z8">
+      <tr>
+        <th>Nom catalogue</th>
+      </tr>
+      <tr *ngFor="let catalogue of listeCatalogues">
+       <ng-container>
+        <td>{{catalogue.cataloguenom}}</td>
+        <td>
+          <button mat-mini-fab color="primary" (click)="openAjoutCatalogue(catalogue)"><mat-icon>edit</mat-icon></button>
+        </td>
+          <td>
+            <button mat-mini-fab color="warn" (click)="supprimer(catalogue)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+      </tr>
+    </table>
+  </div>
+  <div class="classFilter" fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-raised-button color="primary" (click)="openAjoutCatalogue(null)">Ajouter</button>
+    <button mat-raised-button color="accent" (click)="enregistrer()">Enregistrer</button>
+  </div>

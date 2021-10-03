@@ -1,0 +1,58 @@
+<div class="example-form" fxLayout="column" fxLayoutAlign="start stretch">
+  <div class="classFilter" fxLayout="row" fxLayoutAlign="space-around stretch">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Recherche par reference" value="" [(ngModel)]="reference"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </form>
+  </div>
+  <table id="customers" class="mat-elevation-z8">
+    <tr>
+      <th>Tâche</th>
+      <th>Designation</th>
+      <th>phaseid</th>
+      <th>prestataireid</th>
+      <th>nombre d'intervenant</th>
+      <th>date de mise à jour</th>
+    </tr>
+    <tr *ngFor="let prestation of listePrestations">
+      <ng-container>
+        <td>{{prestation.prestationref}}</td>
+        <td>{{prestation.designation}}</td>
+        <td>{{prestation.phaseid}}</td>
+        <td>{{prestation.prestataireid}}</td>
+        <td>{{prestation.nombreintervenant}}</td>
+        <td>{{prestation.datemaj}}</td>
+        <td>
+          <button mat-mini-fab color="primary" (click)="openAjoutPrestation(prestation)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+        <td>
+          <button mat-mini-fab color="warn" (click)="supprimer(prestation)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+    </tr>
+
+  </table>
+  <button mat-raised-button color="primary" (click)="openAjoutPrestation(null)">Ajouter</button>
+  <button mat-raised-button color="accent" (click)="enregistrer()">Enregistrer</button>
+</div>
+<p>Appuyer sur exporter pour télécharger le catalogue</p>
+<div class="classFilter" fxLayout="row" fxLayoutAlign="space-around start">
+  <button mat-raised-button color="primary" (click)="exportAsXLSX()">
+    <mat-icon>cloud_download</mat-icon>exporter
+  </button>
+  <button mat-raised-button color="primary" (click)="rechercheByReferencesFichierExcel()">
+    <mat-icon>cloud_download</mat-icon>Mise à Jour
+  </button>
+
+</div>
+<br>
+<p>Pour une mise à jour globale du catalogue à partir d'un fichier
+  excel veuillez charger le fichier source</p>
+<input type="file" (change)="onFileChange($event)" />
+<div id="output"></div>

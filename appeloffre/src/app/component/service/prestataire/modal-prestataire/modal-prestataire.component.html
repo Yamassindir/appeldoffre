@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <span>Nouveau prestataire</span>
+  </div>
+  <div>
+    <form fxLayout="column" fxLayoutAlign="space-around stretch">
+
+      <mat-form-field>
+        <input matInput placeholder="Profil du prestataire" [(ngModel)]="prestataire.profil"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Fonction" [(ngModel)]="prestataire.fonction" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Centre ingénierie" [(ngModel)]="prestataire.centreingenierie"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="ppm / hppm" [(ngModel)]="prestataire.hppmPpm"
+            [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Marge" [(ngModel)]="prestataire.marge"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Prix prestataire" [(ngModel)]="prestataire.prixprestataire"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="accent" (click)="ajouter()" [disabled]="false">Ajouter</button>
+  </div>
+</div>

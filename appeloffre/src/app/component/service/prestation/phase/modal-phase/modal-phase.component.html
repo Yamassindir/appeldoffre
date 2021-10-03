@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <span>Nouvelle phase</span>
+    </div>
+    <div>
+      <form fxLayout="column" fxLayoutAlign="space-around stretch">
+  
+        <mat-form-field>
+          <input matInput placeholder="Nom de la phase" [(ngModel)]="phase.phasenom" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+
+      </form>
+      <button mat-raised-button color="accent" (click)="ajouter()" [disabled]="false">Ajouter</button>
+    </div>
+  </div>

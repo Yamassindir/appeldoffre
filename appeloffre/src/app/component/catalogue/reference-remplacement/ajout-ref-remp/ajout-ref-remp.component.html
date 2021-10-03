@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div>
+    <form fxLayout="column" fxLayoutAlign="space-around stretch">
+      <mat-form-field>
+        <input matInput placeholder="Reference de remplacement" [(ngModel)]="referenceremplacement.refremplacement" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Quantité" [(ngModel)]="referenceremplacement.quantite" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+    </form>
+    <button mat-raised-button color="accent" (click)="ajouter()" [disabled]="false">Ajouter</button>
+  </div>
+</div>

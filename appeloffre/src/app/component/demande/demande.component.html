@@ -1,0 +1,111 @@
+<!--<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>-->
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="stepOne">
+    <ng-template matStepLabel>Création Demande</ng-template>
+    <app-creation-demande></app-creation-demande>
+  </mat-step>
+  <mat-step [stepControl]="stepTwo">
+    <ng-template matStepLabel>Demande produits</ng-template>
+    <app-demande-produit (devis)="getProduits($event)"></app-demande-produit>
+  </mat-step>
+  <mat-step [stepControl]="stepTree">
+    <ng-template matStepLabel>Demande abonnements</ng-template>
+    <app-demande-abonnement [listeDevisProd]="listeDevis"></app-demande-abonnement>
+  </mat-step>
+  <mat-step [stepControl]="stepFour">
+    <ng-template matStepLabel>Options maintenance</ng-template>
+    <app-demande-maintenance [listeDevisProd]="listeDevis" (devisMaintenance)="getMaintenance($event)">
+    </app-demande-maintenance>
+  </mat-step>
+  <mat-step [stepControl]="stepFive">
+    <ng-template matStepLabel>Demande services</ng-template>
+    <app-demande-service (devisService)="getServices($event)"></app-demande-service>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Terminé</ng-template>
+
+    Cliquer pour faire apparaitre le devis.
+
+    <div class="example-form" fxLayout="column" fxLayoutAlign="start stretch">
+      <table mat-table [dataSource]="dsProdMaint" class="mat-elevation-z8">
+        <ng-container matColumnDef="quantite">
+          <th mat-header-cell *matHeaderCellDef> quantite </th>
+          <td mat-cell *matCellDef="let element"> {{element.quantite}} </td>
+        </ng-container>
+        <ng-container matColumnDef="reference">
+          <th mat-header-cell *matHeaderCellDef> reference </th>
+          <td mat-cell *matCellDef="let element"> {{element.reference}} </td>
+        </ng-container>
+        <ng-container matColumnDef="designation">
+          <th mat-header-cell *matHeaderCellDef> designation </th>
+          <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+        </ng-container>
+        <ng-container matColumnDef="prixliste">
+          <th mat-header-cell *matHeaderCellDef> prixliste </th>
+          <td mat-cell *matCellDef="let element"> {{element.prixliste | currency : 'EUR' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="prixcat">
+          <th mat-header-cell *matHeaderCellDef> prixcat </th>
+          <td mat-cell *matCellDef="let element"> {{element.prixcat | currency : 'EUR' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="prixmaintenance">
+            <th mat-header-cell *matHeaderCellDef> prixmaintenance </th>
+            <td mat-cell *matCellDef="let element"> {{element.prixmaintenance | currency : 'EUR' }} </td>
+          </ng-container>
+        <tr mat-header-row *matHeaderRowDef="dcProdMaint"></tr>
+        <tr mat-row *matRowDef="let row; columns: dcProdMaint;"></tr>
+        <ng-container matColumnDef="groupHeader">
+          <td colspan="999" mat-cell *matCellDef="let group">
+            <mat-icon [style.paddingLeft.ex]="((group.level-1) * 1)" style="padding-right: 1ex;">
+              {{group.expanded ? 'expand_less' : 'expand_more'}}
+            </mat-icon>
+            <strong>{{group.name}} = {{group.value}}</strong>
+          </td>
+        </ng-container>
+        <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: matGroupBy.isGroup"
+          (click)="matGroupBy.toggleExpanded(row)"> </tr>
+      </table>
+    </div>
+
+    <div class="example-form" fxLayout="column" fxLayoutAlign="start stretch">
+        <table mat-table [dataSource]="dsPrestation" class="mat-elevation-z8">
+          <ng-container matColumnDef="tache">
+            <th mat-header-cell *matHeaderCellDef> Tâche </th>
+            <td mat-cell *matCellDef="let element"> {{element.prestationref}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Designation">
+            <th mat-header-cell *matHeaderCellDef> designation </th>
+            <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Prix">
+            <th mat-header-cell *matHeaderCellDef> Prix </th>
+            <td mat-cell *matCellDef="let element"> {{element.prix | currency : 'EUR' }} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="dcPrestation"></tr>
+          <tr mat-row *matRowDef="let row; columns: dcPrestation;"></tr>
+          <ng-container matColumnDef="groupHeader">
+            <td colspan="999" mat-cell *matCellDef="let group">
+              <mat-icon [style.paddingLeft.ex]="((group.level-1) * 1)" style="padding-right: 1ex;">
+                {{group.expanded ? 'expand_less' : 'expand_more'}}
+              </mat-icon>
+              <strong>{{group.name}} = {{group.value}}</strong>
+            </td>
+          </ng-container>
+          <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: matGroupBy.isGroup"
+            (click)="matGroupBy.toggleExpanded(row)"> </tr>
+        </table>
+      </div>
+
+    <pre>
+
+      Le lien suivant renvoie à SharePoint : 
+    </pre>
+    <button mat-raised-button (click)=logger()>Back</button>
+    <div fxLayout="row" fxLayoutAlign="space-around end">
+      <button mat-raised-button matStepperPrevious>Back</button>
+      <button mat-raised-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

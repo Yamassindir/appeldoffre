@@ -1,0 +1,60 @@
+<mat-toolbar color="primary" class="mat-elevation-z8" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-icon-button (click)="currentPage='Bienvenue'" routerLink="/home">
+      <mat-icon>home</mat-icon>Acceuil
+    </button>
+    <pre>                                        </pre>
+    <span style="color:withe;">{{currentPage}}</span>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button mat-icon-button routerLink="/login">
+      <mat-icon>perm_identity</mat-icon>Login
+    </button>
+    <pre>  </pre>
+    <button mat-icon-button [matMenuTriggerFor]="log">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #log="matMenu">
+      <button mat-menu-item>
+        <mat-icon>account_box</mat-icon>
+        <span>Mon compte</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>input</mat-icon>
+        <span>Se déconnecter</span>
+      </button>
+    </mat-menu>
+  </div>
+
+</mat-toolbar>
+<div>
+  <mat-toolbar color="primary" class="mat-elevation-z8">
+    <mat-toolbar-row>
+      <button mat-menu-item (click)="currentPage='Suivi'" routerLink="/demande">Demande</button>
+      <button mat-menu-item>Devis</button>
+
+      <button mat-menu-item (click)="currentPage='Suivi'" routerLink="/suivi">Suivi</button>
+      <button mat-menu-item [matMenuTriggerFor]="catalogue1">Catalogues</button>
+      <mat-menu #catalogue1="matMenu">
+        <button mat-menu-item (click)="currentPage='catalogue produits'" routerLink="/catalogue">Produits</button>
+        <button mat-menu-item [matMenuTriggerFor]="Service">Service</button>
+        <mat-menu #Service="matMenu">
+            <button mat-menu-item (click)="currentPage='catalogue services'" routerLink="/service">Services</button>
+            <button mat-menu-item (click)="currentPage='catalogue Prestataire'" routerLink="/prestataire">Prestataire</button>
+            <button mat-menu-item (click)="currentPage='catalogue Prestation'" routerLink="/prestation">Prestation</button>
+            <button mat-menu-item (click)="currentPage='lise des phases'" routerLink="/phase">Phase</button>
+        </mat-menu>
+        <button mat-menu-item (click)="currentPage='catalogue abonnement'" routerLink="/abonnement">Abonnement</button>
+        <button mat-menu-item (click)="currentPage='catalogue maintenance'"
+          routerLink="/maintenance">Maintenance</button>
+        <button mat-menu-item (click)="currentPage='Nouveaux catalogues'" routerLink="/Nouveauxcatalogues">Nouveaux
+          catalogues</button>
+      </mat-menu>
+      <button mat-menu-item>Marche</button>
+      <button mat-menu-item>Fournisseurs</button>
+      <button mat-menu-item>Commerciaux</button>
+      <button mat-menu-item (click)="currentPage='liste des clients'" routerLink="/client">Clients</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

@@ -1,0 +1,60 @@
+<div>
+	<br>
+	<div>
+		<mat-nav-list class="list-primary" dense>
+			<mat-list-item focus *ngFor="let link of links">
+				<a matLine>{{ link }}</a>
+				<button mat-icon-button>
+					<mat-icon>info</mat-icon>
+				</button>
+			</mat-list-item>
+		</mat-nav-list>
+	</div>
+	<br>
+	<div>
+		<form class="form">
+			<div class="classFilter" fxLayout="column" fxLayoutAlign="center center">
+
+				<mat-card class="example-card">
+					<img mat-card-image src="../../../assets/1200px-Atos_logo.svg.png" alt="1200px-Atos_logo">
+				</mat-card>
+				<div class="container">
+					<h3>
+						Gestionnaire de demande de devis :
+					</h3>
+					<p>
+						plate-forme destiner à gerer les catalogues et les demandes de devis pour
+						le service avant-vente.
+					</p>
+					<p>
+						Pour visualiser, télécharger ou mettre à jour un catalogue, 
+						veuillez suivre le lien suivant : 
+					</p> 
+					<button mat-raised-button  routerLink="/catalogue">Produits</button>
+					<p>
+						pour générer un devis à partir d'une demande client, veuillez suivre le lien suivant : 
+					</p>
+					<button mat-raised-button   routerLink="/demande">Demande</button>
+					
+				</div>
+			</div>
+		</form>
+	</div>
+	<!--<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-mini-fab color="primary"><mat-icon>done</mat-icon></button>
+      <button mat-mini-fab color="accent"><mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>-->
+</div>

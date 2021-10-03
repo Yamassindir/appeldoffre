@@ -1,0 +1,21 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <span>Nouveau Produit</span>
+  </div>
+  <div>
+    <form fxLayout="column" fxLayoutAlign="space-around stretch">
+
+      <mat-form-field>
+        <input matInput placeholder="Reference du Produit" [(ngModel)]="abonnement.abonnementref" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput  placeholder="Désignation" [(ngModel)]="abonnement.designation" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="Prix abonnement" [(ngModel)]="abonnement.prixabonnement" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+    </form>
+    <button mat-raised-button color="accent" (click)="ajouter()" [disabled]="false">Ajouter</button>
+  </div>
+</div>

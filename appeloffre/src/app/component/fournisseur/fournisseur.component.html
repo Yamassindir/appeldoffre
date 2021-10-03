@@ -1,0 +1,16 @@
+<div class="container-fluid" *ngIf="lessons">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 lesson-card" *ngFor="let lesson of sortedLessonCards()">
+                <div class="card lesson-border">
+                    <img class="card-img-top" src="{{fournisseur.image_path}}" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text"><b>Date: </b>{{fournisseur.startdate}}</p>
+                        <h5 class="card-title"><b>Title: </b>{{fournisseur.title}}</h5>
+                        <p class="card-text"><b>Description: </b>{{fournisseur.description}}</p>
+                        <button type="button" class="btn btn-lesson" (click)="open(fournisseur)">fournisseur Details</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>

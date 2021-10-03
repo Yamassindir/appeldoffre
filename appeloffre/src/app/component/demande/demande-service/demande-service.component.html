@@ -1,0 +1,125 @@
+<form [formGroup]="step">
+
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]='f_firstPanel' [disabled]='!f_firstPanel'>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Services
+        </mat-panel-title>
+        <mat-panel-description>
+          Configuration de la demande des services
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="example-form" fxLayout="column" fxLayoutAlign="center stretch">
+        <table mat-table [dataSource]="dsPrestation" class="mat-elevation-z8">
+          <ng-container matColumnDef="tache">
+            <th mat-header-cell *matHeaderCellDef> Tache </th>
+            <td mat-cell *matCellDef="let element"> {{element.prestationref}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Designation">
+            <th mat-header-cell *matHeaderCellDef> Designation </th>
+            <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Prix">
+            <th mat-header-cell *matHeaderCellDef> Prix </th>
+            <td mat-cell *matCellDef="let element"> {{element.prix | currency : 'EUR'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Editer </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button color="primary" (click)='editDemandeService(element)'>
+                <mat-icon>edit</mat-icon>
+              </button> </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="dcPrestation"></tr>
+          <tr mat-row *matRowDef="let row; columns: dcPrestation;"></tr>
+          <ng-container matColumnDef="groupHeader">
+            <td colspan="999" mat-cell *matCellDef="let group">
+              <mat-icon [style.paddingLeft.ex]="((group.level-1) * 1)" style="padding-right: 1ex;">
+                {{group.expanded ? 'expand_less' : 'expand_more'}}
+              </mat-icon>
+              <strong>Phase : {{group.value}}</strong>
+            </td>
+          </ng-container>
+          <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: matGroupBy.isGroup"
+            (click)="matGroupBy.toggleExpanded(row)"> </tr>
+        </table>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]='f_secondPanel' [disabled]='!f_secondPanel'>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Profil
+        </mat-panel-title>
+        <mat-panel-description>
+          Ajouter des profils à une tâche
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p> Veuillez choisir un profil de la liste</p>
+      <mat-tab-group>
+        <mat-tab label="Profil">
+          <h4>Choix du Profil</h4>
+          <mat-form-field>
+            <mat-select [(ngModel)]="prestataireAjoute" placeholder="*liste prestataire"
+              [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let prestataire of listePrestataires" [value]="prestataire">
+                {{prestataire.profil}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button (click)="addPrestataire()" style="margin: 10px">Ajout du Profil</button>
+          <br>
+          <table mat-table [dataSource]="dsPrestataire" class="mat-elevation-z8">
+            <ng-container matColumnDef="quantite">
+              <th mat-header-cell *matHeaderCellDef> Quantite </th>
+              <td mat-cell *matCellDef="let prestataire">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="number" placeholder="Quantite" [(ngModel)]="prestataire.quantite"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="profil">
+              <th mat-header-cell *matHeaderCellDef> Profil </th>
+              <td mat-cell *matCellDef="let prestataire"> {{prestataire.profil}} </td>
+            </ng-container>
+            <ng-container matColumnDef="fonction">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let prestataire"> {{prestataire.fonction}} </td>
+            </ng-container>
+            <ng-container matColumnDef="centreingenierie">
+              <th mat-header-cell *matHeaderCellDef> Centre ingenierie </th>
+              <td mat-cell *matCellDef="let prestataire"> {{prestataire.centreingenierie}} </td>
+            </ng-container>
+            <ng-container matColumnDef="prixprestataire">
+              <th mat-header-cell *matHeaderCellDef> SCR </th>
+              <td mat-cell *matCellDef="let prestataire"> {{prestataire.prixprestataire | currency : 'EUR' }} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="dcPrestataire"></tr>
+            <tr mat-row *matRowDef="let row; columns: dcPrestataire;"></tr>
+          </table>
+        </mat-tab>
+        <mat-tab label="khdem dimk">
+          <h4>Badge Choose</h4>
+        </mat-tab>
+      </mat-tab-group>
+      <br>
+      <div style="margin: auto">
+        <button mat-raised-button color="primary" style="margin: 30px" (click)="finishEdit()">Terminer</button>
+        <button mat-raised-button color="primary" style="margin: 30px" (click)="cancelEdit()">Retour</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <pre>
+
+
+
+  </pre>
+
+  <div fxLayout="row" fxLayoutAlign="space-around end">
+    <button mat-raised-button matStepperPrevious>Retour</button>
+    <button mat-raised-button matStepperNext>Suivant</button>
+  </div>
+
+</form>

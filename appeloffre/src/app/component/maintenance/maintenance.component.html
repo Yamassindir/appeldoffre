@@ -1,0 +1,62 @@
+<div class="example-form" fxLayout="column" fxLayoutAlign="start stretch">
+  <div class="classFilter" fxLayout="row" fxLayoutAlign="space-around stretch">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Recherche par reference" value="" [(ngModel)]="reference"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </form>
+  </div>
+  <!---->
+
+  <table id="customers" class="mat-elevation-z8" >
+    <thead>
+      <tr>
+        <th *ngFor="let key of propriete">{{ key }}</th>
+      </tr>
+    </thead>
+    <ng-container>
+      <tbody>
+        <tr *ngFor="let maint of listeTeste">
+          <td *ngFor="let key of propriete">{{ maint[key]  }}</td>
+          <td>
+            <button mat-mini-fab color="primary" (click)="openAjoutProduit(produit)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td>
+            <button mat-mini-fab color="warn" (click)="supprimer(produit)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </ng-container>
+  </table>
+
+  <!---->
+  <button mat-raised-button color="primary" (click)="openAjoutMaintenance(null)">Ajouter</button>
+  <button mat-raised-button color="primary" (click)="toTable()">set Maint</button>
+  <button mat-raised-button color="primary" (click)="toUser()">get Maint</button>
+  <button mat-raised-button color="accent" (click)="enregistrer()">Enregistrer</button>
+</div>
+
+<p>Appuyer sur exporter pour télécharger le catalogue</p>
+<div class="classFilter" fxLayout="row" fxLayoutAlign="space-around start">
+  <button mat-raised-button color="primary" (click)="exportAsXLSX()">
+    <mat-icon>cloud_download</mat-icon>exporter
+  </button>
+  <button mat-raised-button color="primary" (click)="rechercheByReferencesFichierExcel()">
+    <mat-icon>cloud_download</mat-icon>Mise à Jour
+  </button>
+
+</div>
+<br>
+<p>Pour une mise à jour globale du catalogue à partir d'un fichier
+  excel veuillez charger le fichier source : </p>
+<p>
+  * les colonnes de votre tableau excel doit obligatoirement respecter le schéma suivant :
+
+</p>
+<input type="file" (change)="onFileChange($event)" />
+<div id="output"></div>

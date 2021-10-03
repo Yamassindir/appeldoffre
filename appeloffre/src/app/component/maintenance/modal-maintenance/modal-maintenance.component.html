@@ -1,0 +1,30 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <span>Nouveau maintenance</span>
+    </div>
+    <div>
+      <form fxLayout="column" fxLayoutAlign="space-around stretch">
+  
+        <mat-form-field>
+          <input matInput placeholder="Reference du maintenance" [(ngModel)]="maintenance.produitid" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput  placeholder="Option nrd" [(ngModel)]="maintenance.nrd" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput  placeholder="Type maintenance" [(ngModel)]="maintenance.type" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="niveau maintenance" [(ngModel)]="maintenance.niveau" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput type="number" placeholder="Duree maintenance" [(ngModel)]="maintenance.duree" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Prix maintenance" [(ngModel)]="maintenance.prix" [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+      </form>
+      <button mat-raised-button color="accent" (click)="ajouter()" [disabled]="false">Ajouter</button>
+    </div>
+  </div>

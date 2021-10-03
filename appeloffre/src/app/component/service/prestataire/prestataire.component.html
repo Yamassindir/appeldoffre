@@ -1,0 +1,62 @@
+<div class="example-form" fxLayout="column" fxLayoutAlign="start stretch">
+  <div class="classFilter" fxLayout="row" fxLayoutAlign="space-around stretch">
+
+      <mat-selection-list #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
+          <mat-list-option *ngFor="let prestataire of listePrestataires" [value]="prestataire.designation">
+            {{prestataire.designation}}
+          </mat-list-option>
+      </mat-selection-list>
+
+
+
+
+
+      <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Recherche par reference" value="" [(ngModel)]="reference"  [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    </form>
+  </div>
+  <table id="customers" class="mat-elevation-z8">
+    <tr>
+      <th>profil</th>
+      <th>Fonction prestataire</th>
+      <th>hppmPpm</th>
+      <th>centreingenierie</th> 
+      <th>prixunitairejour</th>
+      <th>marge</th>
+      <th>date de mise à jour</th>
+    </tr>
+    <tr *ngFor="let prestataire of listePrestataires">
+     <ng-container>
+      <td>{{prestataire.profil}}</td>
+      <td>{{prestataire.fonction}}</td>
+      <td>{{prestataire.hppmPpm}}</td>
+      <td>{{prestataire.centreingenierie}}</td>
+      <td>{{prestataire.prixprestataire}}</td>
+      <td>{{prestataire.marge}}</td>
+      <td>{{prestataire.datemaj}}</td>
+      <td>
+        <button mat-mini-fab color="primary" (click)="openAjoutPrestataire(prestataire)"><mat-icon>edit</mat-icon></button>
+      </td>
+        <td>
+          <button mat-mini-fab color="warn" (click)="supprimer(produit)"><mat-icon>delete</mat-icon></button>
+        </td>
+      </ng-container>
+    </tr>
+
+  </table>
+  <button mat-raised-button color="primary" (click)="openAjoutPrestataire(null)">Ajouter</button>
+  <button mat-raised-button color="accent" (click)="enregistrer()">Enregistrer</button>
+</div>
+<p>Appuyer sur exporter pour télécharger le catalogue</p>
+<div class="classFilter" fxLayout="row" fxLayoutAlign="space-around start">
+<button mat-raised-button color="primary" (click)="exportAsXLSX()"><mat-icon>cloud_download</mat-icon>exporter</button>
+<button mat-raised-button color="primary" (click)="rechercheByReferencesFichierExcel()"><mat-icon>cloud_download</mat-icon>Mise à Jour</button>
+
+</div>
+<br>
+<p>Pour une mise à jour globale du catalogue à partir d'un fichier 
+  excel veuillez charger le fichier source</p>
+<input type="file" (change)="onFileChange($event)" />
+<div id="output"></div>

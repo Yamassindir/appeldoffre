@@ -1,0 +1,30 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <span>Nouveau Produit</span>
+  </div>
+  <div>
+    <form fxLayout="column" fxLayoutAlign="space-around stretch">
+
+      <mat-form-field>
+        <input matInput placeholder="Reference du Produit" [(ngModel)]="produit.reference" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput  placeholder="Désignation" [(ngModel)]="produit.designation" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput  placeholder="Type" [(ngModel)]="produit.type" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Lot" [(ngModel)]="produit.lot" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="Prix catalogue" [(ngModel)]="produit.prixcat" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput type="number" placeholder="Prix client" [(ngModel)]="produit.prixliste" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+    </form>
+    <button mat-raised-button color="accent" (click)="ajouter()" [disabled]="false">Ajouter</button>
+  </div>
+</div>

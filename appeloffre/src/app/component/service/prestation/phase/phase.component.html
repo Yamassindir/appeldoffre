@@ -1,0 +1,35 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table *ngIf="listePhase != null" #table [dataSource]="listePhase">
+
+    <ng-container matColumnDef="phasenom">
+      <mat-header-cell *matHeaderCellDef> Phase </mat-header-cell>
+      <mat-cell *matCellDef="let phase"> {{phase.phasenom}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button (click)="openAjoutPhase(listePhase)" [disabled]="false">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-button color="warn" (click)="supprimer(phase)" [disabled]="false">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-raised-button color="accent" (click)="openAjoutPhase(null)" [disabled]="false">Ajouter</button>
+    <button mat-raised-button color="accent" (click)="enregistrer()">Enregistrer</button>
+  </div>
+</div>

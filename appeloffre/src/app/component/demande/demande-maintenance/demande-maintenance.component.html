@@ -1,0 +1,94 @@
+<form [formGroup]="step">
+  <h4>Options de la maintenance</h4>
+  <p>
+    <mat-checkbox>NRD</mat-checkbox>
+  </p>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-form-field>
+    <mat-label>Niveau</mat-label>
+    <mat-select [(ngModel)]="niveau" name="niveau" [ngModelOptions]="{standalone: true}" >
+        <mat-option  *ngFor="let option of listeOption | unique : 'niveau'" [value]="option.niveau">
+            {{option.niveau}}
+        </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select [(ngModel)]="type" name="type" [ngModelOptions]="{standalone: true}">
+        <mat-option *ngFor="let option of listeOption | unique : 'type'" [value]="option.type">
+            {{option.type}}
+        </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Durées</mat-label>
+    <mat-select [(ngModel)]="duree" name="duree" [ngModelOptions]="{standalone: true}" >
+        <mat-option *ngFor="let option of listeOption | unique : 'duree'" [value]="option.duree">
+          {{option.duree}}
+        </mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+
+<button mat-raised-button (click)=getPrixMaintenances()>getPrixMaint</button>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="quantite">
+      <th mat-header-cell *matHeaderCellDef> quantite </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantite}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="reference">
+      <th mat-header-cell *matHeaderCellDef> reference </th>
+      <td mat-cell *matCellDef="let element"> {{element.reference}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="designation">
+      <th mat-header-cell *matHeaderCellDef> designation </th>
+      <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="prixliste">
+      <th mat-header-cell *matHeaderCellDef> prixliste </th>
+      <td mat-cell *matCellDef="let element"> {{element.prixliste | currency : 'EUR'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="prixcat">
+        <th mat-header-cell *matHeaderCellDef> prixcat </th>
+        <td mat-cell *matCellDef="let element"> {{element.prixcat | currency : 'EUR'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="prixmaintenance">
+          <th mat-header-cell *matHeaderCellDef> prix maintenance </th>
+          <td mat-cell *matCellDef="let element"> {{element.prixmaintenance | currency : 'EUR'}} </td>
+        </ng-container>
+        
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+
+    <ng-container matColumnDef="groupHeader">
+      <td colspan="999" mat-cell *matCellDef="let group">
+        <mat-icon [style.paddingLeft.ex]="((group.level-1) * 1)" style="padding-right: 1ex;">
+          {{group.expanded ? 'expand_less' : 'expand_more'}}
+        </mat-icon>
+        <strong>{{group.name}} = {{group.value}}</strong>
+      </td>
+    </ng-container>
+  
+    <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: matGroupBy.isGroup" (click)="matGroupBy.toggleExpanded(row)"> </tr>
+  
+  </table>
+
+<pre>
+
+
+
+</pre>
+
+  <div fxLayout="row" fxLayoutAlign="space-around end">
+    <button mat-raised-button matStepperPrevious>Retour</button>
+    <button mat-raised-button matStepperNext>Suivant</button>
+  </div>
+</form>
